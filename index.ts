@@ -127,6 +127,11 @@ export const M = {
     },
 
     download(): LinkProcessorMatcherRule["match"] {
+        const PAGE_EXTENSIONS = [
+            "html",
+            "htm"
+        ];
+
         return link => {
             if (link.href) {
                 // check if is a file link
@@ -134,8 +139,8 @@ export const M = {
                 const { pathname } = new URL(link.href, "https://localhost");
                 const parts = pathname.split(".");
                 if (parts.length >= 2) {
-                    const extension = parts.pop()!;
-                    if (extension.length >= 1 || extension.length <= 4) {
+                    const extension = parts.pop()!.toLowerCase();
+                    if ((extension.length >= 1 || extension.length <= 4) && !PAGE_EXTENSIONS.includes(extension)) {
                         return { download: pathname.split("/").pop()! };
                     }
                 }

@@ -126,11 +126,13 @@ export const M = {
         };
     },
 
-    download(): LinkProcessorMatcherRule["match"] {
-        const PAGE_EXTENSIONS = [
-            "html",
-            "htm"
-        ];
+    download(options?: {
+        skipExtensions?: string[]
+    }): LinkProcessorMatcherRule["match"] {
+        const {
+            skipExtensions = ["html", "htm"],
+        } = options || {};
+
 
         return link => {
             if (link.href) {
@@ -140,7 +142,7 @@ export const M = {
                 const parts = pathname.split(".");
                 if (parts.length >= 2) {
                     const extension = parts.pop()!.toLowerCase();
-                    if ((extension.length >= 1 || extension.length <= 4) && !PAGE_EXTENSIONS.includes(extension)) {
+                    if ((extension.length >= 1 || extension.length <= 4) && !skipExtensions.includes(extension)) {
                         return { download: pathname.split("/").pop()! };
                     }
                 }
@@ -153,9 +155,11 @@ export const M = {
 
 
 export const R = {
-    download(): LinkProcessorMatcherRule {
+    download(options?: {
+        skipExtensions?: string[]
+    }): LinkProcessorMatcherRule {
         return {
-            match: M.download(),
+            match: M.download(options),
             action: [
                 A.mergeClass("download"),
                 link => ({ download: link.download || true })

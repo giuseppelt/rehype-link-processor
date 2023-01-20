@@ -43,7 +43,7 @@ export type LinkProcessorRule =
     | LinkProcessorMatcherRule
     | LinkProcessorTransformerRule
 
-export type LinkProcessorBuiltinRule = keyof typeof BUILTIN;
+export type LinkProcessorBuiltinRule = keyof typeof R;
 export type LinkProcessorTransformerRule = (link: MarkdownLink) => Link | false | undefined;
 export type LinkProcessorMatcherRule = {
     match(link: Readonly<MarkdownLink>): boolean | Link | undefined
@@ -152,7 +152,7 @@ export const M = {
 }
 
 
-const BUILTIN = {
+export const R = {
     download(): LinkProcessorMatcherRule {
         return {
             match: M.download(),
@@ -191,15 +191,15 @@ export default function rehypeLinkProcessor(options?: LinkProcessorOptions) {
     } = options || {};
 
     if (useBuiltin) {
-        const rules = (Object.keys(BUILTIN) as LinkProcessorBuiltinRule[]).filter(x => !designRules.includes(x));
-        designRules.push(...rules.map(x => BUILTIN[x]()));
+        const rules = (Object.keys(R) as LinkProcessorBuiltinRule[]).filter(x => !designRules.includes(x));
+        designRules.push(...rules.map(x => R[x]()));
     }
 
 
     const rules = designRules.map(rule => {
         // it's a builtin rule --> expand it
         if (typeof rule === "string") {
-            const builtin = BUILTIN[rule];
+            const builtin = R[rule];
             if (!builtin) {
                 throw new Error(`Builtin rule '${rule}' unknown`);
             }

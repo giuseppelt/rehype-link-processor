@@ -1,6 +1,6 @@
 {
   "name": "rehype-link-processor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "rehype plugin to process links adding custom css class or attributes used by external or download links",
   "sideEffects": false,
   "type": "module",

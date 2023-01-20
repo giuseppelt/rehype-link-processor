@@ -1,5 +1,10 @@
 # rehype-link-processor changelog
 
+## 1.0.3 Patch release
+feat: exported builtin rules as R
+feat: added extension configuration for the download rule
+fix: added md and mdx to the default excluded extension for the download rule
+
 ## 1.0.2 Patch release
 fix: exclude html and htm extensions for download link detection
 

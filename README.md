@@ -102,11 +102,21 @@ rehypeLinkProcessor({
   useBuiltin: false
 })
 ```
-When you disable builtin rules, you can add the ones you like manually.
+When you disable builtin rules, you can add the ones you like manually:
 ```ts
 rehypeLinkProcessor({
   rules: [
     "external"   // <-- enable the external link rule
+  ]
+})
+```
+or your use the helper `R` when you need a configuration:
+```ts
+rehypeLinkProcessor({
+  rules: [
+    R.download({
+      skipExtension: ["html"] // exclude html to be considered a download
+    })
   ]
 })
 ```
@@ -147,7 +157,7 @@ The builtin rules are:
 - `download`
   
   looks for download links matching when one of:
-    - the url ends with `.<ext>` where `ext` is [1-4] chars long
+    - the url ends with `.<ext>` where `ext` is [1-4] chars long (excluded: `html`, `htm`, `md`, `mdx`)
     - the url start with the prefix `download:`
     - the text start with the prefix `download:`
   

@@ -130,7 +130,7 @@ export const M = {
         skipExtensions?: string[]
     }): LinkProcessorMatcherRule["match"] {
         const {
-            skipExtensions = ["html", "htm"],
+            skipExtensions = ["html", "htm", "md", "mdx"],
         } = options || {};
 
 

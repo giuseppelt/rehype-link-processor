@@ -116,6 +116,17 @@ export const M = {
         };
     },
 
+    email(): LinkProcessorMatcherRule["match"] {
+        return link => {
+            if (link.href?.startsWith("mailto:")) {
+                return {};
+            }
+
+            return M.prefix("email:")(link);
+        }
+    },
+
+
     external(): LinkProcessorMatcherRule["match"] {
         return link => {
             if (link.href?.startsWith("http:") || link.href?.startsWith("https:")) {
@@ -173,6 +184,12 @@ export const R = {
                 { target: "_blank", rel: "external nofollow noopener" }, //cspell:disable-line
                 A.mergeClass("external")
             ]
+        };
+    },
+    email(): LinkProcessorMatcherRule {
+        return {
+            match: M.email(),
+            action: A.mergeClass("email")
         };
     },
     "same-page"(): LinkProcessorMatcherRule {

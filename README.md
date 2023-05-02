@@ -125,9 +125,9 @@ The builtin rules are:
 - `external`
   
   looks for external links matching when one of:
-    - the url start with http: or https:
-    - the url start with the prefix `external:`
-    - the text start with the prefix `external:`
+    - the url starts with `http:` or `https`:
+    - the url starts with the prefix `external:`
+    - the text starts with the prefix `external:`
   
   if matched, the resulting `a` will have the attributes:
     - `class` = "external"
@@ -157,9 +157,9 @@ The builtin rules are:
 - `download`
   
   looks for download links matching when one of:
-    - the url ends with `.<ext>` where `ext` is [1-4] chars long (excluded: `html`, `htm`, `md`, `mdx`)
-    - the url start with the prefix `download:`
-    - the text start with the prefix `download:`
+    - the url starts with `http:` or `https:` and the path ends with `.<ext>` where `ext` is [1-4] chars long (excluded: `html`, `htm`, `md`, `mdx`)
+    - the url starts with the prefix `download:`
+    - the text starts with the prefix `download:`
   
   if matched, the resulting `a` will have the attributes:
     - `class` = "download"
@@ -183,6 +183,37 @@ The builtin rules are:
 
   </details>
   <br />
+
+
+- `email`
+  
+  looks for email links matching when one of:
+    - the url starts with `mailto:`
+    - the url starts with the prefix `email:`
+    - the text starts with the prefix `email:`
+  
+  if matched, the resulting `a` will have the attributes:
+    - `class` = "email"
+
+  <br />
+  <details>
+  <summary><b>Examples</b></summary>
+
+  Markdown: <br />
+  `[Contact us](support@domain.com)`
+
+  HTML: <br />
+  `<a href="mailto:support@domain.com" class="email">Contact us<a>`
+  ***
+  Markdown: <br />
+  `[email:Send us a mail](info@domain.com)`
+
+  HTML: <br />
+  `<a href="mailto:info@domain.com" class="email">Send us a mail<a>`
+
+  </details>
+  <br />
+
 
 - `same-page`
 

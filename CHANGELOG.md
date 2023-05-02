@@ -1,5 +1,9 @@
 # rehype-link-processor changelog
 
+## 1.0.4 Patch release
+feat: new 'email' builtin rule
+fix: force download rule to match against http* protocol
+
 ## 1.0.3 Patch release
 feat: exported builtin rules as R
 feat: added extension configuration for the download rule

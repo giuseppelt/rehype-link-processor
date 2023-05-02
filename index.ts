@@ -135,7 +135,7 @@ export const M = {
 
 
         return link => {
-            if (link.href) {
+            if (link.href?.startsWith("http:") || link.href?.startsWith("https:")) {
                 // check if is a file link
                 // check if has an extension, .1-4 char length
                 const { pathname } = new URL(link.href, "https://localhost");
